@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
+import { Spinner } from '@/components';
 import { createDynamicQuizRoute } from '@/constants/route';
 import { useSetTimeContext } from '@/contexts';
 import { useQuizsSettersContext } from '@/contexts/QuizContext';
@@ -27,6 +28,12 @@ export function QuizStart({ quizs: quiz }: QuizStartProps) {
     }
   }, [initQuizs, quiz, router, setTime]);
 
-  // TODO: 가운데 맞추고, 로딩 스피너 추가
-  return <div>Loading...</div>;
+  return (
+    <div className="w-full h-full flex flex-col gap-[30px] justify-center items-center">
+      <div className="w-full h-full max-w-[200px] max-h-[200px] min-w-[100px] min-h-[100px] m-[50px]">
+        <Spinner />
+      </div>
+      <h1>Loading...</h1>
+    </div>
+  );
 }
