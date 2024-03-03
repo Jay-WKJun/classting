@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 
 import { createDynamicQuizRoute } from '@/constants/route';
 import { useSetTimeContext } from '@/contexts';
-import { useSetQuizContext } from '@/contexts/QuizContext';
+import { useQuizsSettersContext } from '@/contexts/QuizContext';
 import { QuizModelPOJO } from '@/models/QuizModel';
 
 interface QuizStartProps {
@@ -15,8 +15,8 @@ interface QuizStartProps {
 export function QuizStart({ quizs: quiz }: QuizStartProps) {
   const router = useRouter();
 
-  const setQuizContext = useSetQuizContext();
-  const initQuizs = setQuizContext?.initQuizs;
+  const quizsSettersContext = useQuizsSettersContext();
+  const initQuizs = quizsSettersContext?.initQuizs;
   const setTime = useSetTimeContext();
 
   useEffect(() => {

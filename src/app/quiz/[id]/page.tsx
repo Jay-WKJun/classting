@@ -10,13 +10,14 @@ import {
   RESULT,
   createDynamicQuizRoute,
 } from '@/constants/route';
-import { useQuizContext, useSetQuizContext } from '@/contexts';
+import { useQuizsContext, useQuizsSettersContext } from '@/contexts';
 
 function QuizServerPage() {
   const router = useRouter();
-  const quizs = useQuizContext();
-  const setquizContext = useSetQuizContext();
-  const setQuizs = setquizContext?.setQuizs;
+  const quizs = useQuizsContext();
+  const quizsSetters = useQuizsSettersContext();
+  const setQuizs = quizsSetters?.setQuizs;
+
   const params = useParams();
   const id = Number(params.id);
   const isIdExist = params.id != null && !Number.isNaN(id);

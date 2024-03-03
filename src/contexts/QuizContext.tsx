@@ -12,8 +12,8 @@ import { QuizModel, QuizModelPOJO, createQuizModel } from '@/models/QuizModel';
 
 type QuizState = QuizModel[];
 
-const QuizContext = createContext<QuizState>([]);
-const SetQuizContext = createContext<
+const QuizsContext = createContext<QuizState>([]);
+const QuizsSettersContext = createContext<
   | {
       setQuizs: Dispatch<SetStateAction<QuizState>>;
       initQuizs: (quizPojos: QuizModelPOJO[]) => void;
@@ -33,15 +33,15 @@ export function QuizStateProvider({
   }, []);
 
   return (
-    <QuizContext.Provider value={quizs}>
-      <SetQuizContext.Provider
+    <QuizsContext.Provider value={quizs}>
+      <QuizsSettersContext.Provider
         value={useMemo(() => ({ initQuizs, setQuizs }), [initQuizs])}
       >
         {children}
-      </SetQuizContext.Provider>
-    </QuizContext.Provider>
+      </QuizsSettersContext.Provider>
+    </QuizsContext.Provider>
   );
 }
 
-export const useQuizContext = () => useContext(QuizContext);
-export const useSetQuizContext = () => useContext(SetQuizContext);
+export const useQuizsContext = () => useContext(QuizsContext);
+export const useQuizsSettersContext = () => useContext(QuizsSettersContext);
