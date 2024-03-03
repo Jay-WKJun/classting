@@ -2,7 +2,7 @@
 
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { QuizSelections, BarChart, LinkButton } from '@/components';
 import { HOME, QUIZ_START } from '@/constants/route';
@@ -11,6 +11,8 @@ import { useQuizsContext, useTimeContext } from '@/contexts';
 import { getCounts, getCountLabel, getSpentTime } from './utils';
 
 function ResultPage() {
+  const [resultTime, setResultTime] = useState(0);
+
   const router = useRouter();
   const startTime = useTimeContext();
   const quizs = useQuizsContext();
@@ -18,7 +20,10 @@ function ResultPage() {
   useEffect(() => {
     if (quizs.length <= 0 || !startTime) {
       router.push(HOME);
+      return;
     }
+
+    setResultTime(getSpentTime(startTime));
   }, [quizs, router, startTime]);
 
   const correctCount = getCounts(
@@ -33,7 +38,7 @@ function ResultPage() {
   const CorrectCount = getCountLabel('정답 갯수', correctCount);
   const InCorrectCount = getCountLabel('오답 갯수', inCorrectCount);
 
-  const SpentTime = format(getSpentTime(startTime!), '소요시간 : m분 s초');
+  const SpentTime = format(resultTime, '소요시간 : m분 s초');
 
   const barGraphData = [
     {
