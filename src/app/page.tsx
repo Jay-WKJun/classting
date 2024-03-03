@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { QUIZ_START } from '@/constants/route';
 
-export default function Home() {
+function Home() {
   return (
     <div className="flex flex-col items-center w-full h-full">
       <h1 className="flex justify-center items-end w-full h-[30%] text-[40px] font-bold">
@@ -19,3 +19,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

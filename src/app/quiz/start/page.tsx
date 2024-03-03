@@ -4,7 +4,7 @@ import { getQuizs } from '@/api/quizApi';
 
 import { QuizStart } from './QuizStart';
 
-export async function QuizStartPage() {
+async function QuizStartPage() {
   const quizs = await getQuizs({});
 
   if (!quizs) {
@@ -13,3 +13,5 @@ export async function QuizStartPage() {
 
   return <QuizStart quizs={quizs.results} />;
 }
+
+export default QuizStartPage;
