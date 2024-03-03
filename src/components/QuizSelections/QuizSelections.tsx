@@ -17,8 +17,8 @@ export function QuizSelections({ hold, quiz, onClick }: QuizSelectionsProps) {
 
   return (
     <div className="flex flex-col w-full h-fit gap-[30px]">
-      <section className="flex items-center h-[40%]">
-        <h1 className="text-center">{quiz?.question}</h1>
+      <section className="flex items-center h-[40%] w-full px-[2em]">
+        <h1 className="text-center w-full">{quiz?.question}</h1>
       </section>
       <section className="flex-1 flex justify-center items-center">
         <div className="flex flex-col gap-[20px]">
