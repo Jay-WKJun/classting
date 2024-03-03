@@ -10,7 +10,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "axios": "^1.6.7",
     "humps": "^2.0.1",
     "next": "14.1.1",
@@ -20,6 +19,8 @@
   "devDependencies": {
     "@commitlint/cli": "^19.0.3",
     "@commitlint/config-conventional": "^19.0.3",
+    "@types/axios": "^0.14.0",
+    "@types/humps": "^2.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
