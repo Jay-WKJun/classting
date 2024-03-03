@@ -18,7 +18,6 @@ function Selection({
   state,
   onClick,
 }: SelectionProps) {
-  // TODO: twin.macro 적용해서 dynamic style 적용하기
   const backgroundColor = useMemo(() => {
     if (state === 'selected') {
       return 'green';
