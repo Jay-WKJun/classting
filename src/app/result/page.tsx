@@ -4,8 +4,7 @@ import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { QuizSelections, BarChart } from '@/components';
-import { LinkButton } from '@/components/LinkButton';
+import { QuizSelections, BarChart, LinkButton } from '@/components';
 import { HOME, QUIZ_START } from '@/constants/route';
 import { useQuizsContext, useTimeContext } from '@/contexts';
 
