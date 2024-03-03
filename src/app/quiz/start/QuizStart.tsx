@@ -19,7 +19,7 @@ export function QuizStart({ quizs: quiz }: QuizStartProps) {
 
   useEffect(() => {
     initQuizs?.(quiz);
-    router.push(createDynamicQuizRoute(1));
+    router.push(createDynamicQuizRoute(0));
   }, [initQuizs, quiz, router]);
 
   return <div>Loading...</div>;
