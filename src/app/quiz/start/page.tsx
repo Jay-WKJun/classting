@@ -8,8 +8,7 @@ async function QuizStartPage() {
   const quizs = await getQuizs({});
 
   if (!quizs || quizs.results.length === 0) {
-    // TODO: 에러 페이지로 이동
-    return null;
+    throw new Error('Failed to load quizs. 🤯 Please Try Again.');
   }
 
   return <QuizStart quizs={quizs.results} />;
