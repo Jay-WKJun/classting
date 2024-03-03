@@ -62,7 +62,9 @@ function ResultPage() {
         <h3>{InCorrectCount}</h3>
         <h3>{SpentTime}</h3>
       </section>
+      <hr />
       <section className="flex flex-col gap-[50px] mb-[50px]">
+        <h1 className="w-full text-center text-[40px]">오답 노트</h1>
         {quizs.map((quiz) => (
           <div
             key={`quizResult-${quiz.question}`}
