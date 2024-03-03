@@ -8,24 +8,8 @@ import { useEffect } from 'react';
 import { QuizSelections, BarChart } from '@/components';
 import { HOME, QUIZ_START } from '@/constants/route';
 import { useQuizsContext, useTimeContext } from '@/contexts';
-import type { QuizModel } from '@/models/QuizModel';
 
-function getCounts(callback: (el: QuizModel) => boolean, quizs?: QuizModel[]) {
-  if (!quizs) return 0;
-
-  return quizs.reduce((prev, curr) => {
-    if (callback(curr)) return prev + 1;
-    return prev;
-  }, 0);
-}
-
-function getCountLabel(label: string, count: number) {
-  return `${label} : ${count} 개`;
-}
-
-function getSpentTime(startTime: number) {
-  return Date.now() - startTime;
-}
+import { getCounts, getCountLabel, getSpentTime } from './utils';
 
 function ResultPage() {
   const router = useRouter();
