@@ -10,9 +10,9 @@ import {
 
 import { QuizModel, QuizModelPOJO, createQuizModel } from '@/models/QuizModel';
 
-type QuizState = QuizModel[] | undefined;
+type QuizState = QuizModel[];
 
-const QuizContext = createContext<QuizState>(undefined);
+const QuizContext = createContext<QuizState>([]);
 const SetQuizContext = createContext<
   | {
       setQuizs: Dispatch<SetStateAction<QuizState>>;
@@ -26,7 +26,7 @@ export function QuizStateProvider({
 }: {
   children: React.ReactElement;
 }) {
-  const [quizs, setQuizs] = useState<QuizModel[]>();
+  const [quizs, setQuizs] = useState<QuizModel[]>([]);
 
   const initQuizs = useCallback((quizPojos: QuizModelPOJO[]) => {
     setQuizs(quizPojos.map((quiz) => createQuizModel(quiz)));
