@@ -5,7 +5,7 @@ import { QUIZ_START } from '@/constants/route';
 function Home() {
   return (
     <div className="flex flex-col items-center w-full h-full">
-      <h1 className="flex justify-center items-end w-full h-[30%] text-[40px] font-bold">
+      <h1 className="flex justify-center items-end w-full h-[30%]">
         Classting Quiz!
       </h1>
       <div className="flex justify-center items-center flex-1">

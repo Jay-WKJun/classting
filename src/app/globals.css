@@ -26,6 +26,11 @@ body {
   height: 100vh;
 }
 
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
