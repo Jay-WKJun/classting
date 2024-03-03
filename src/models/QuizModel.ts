@@ -35,6 +35,7 @@ export function createQuizModel(quizPOJO: QuizModelPOJO): QuizModel {
     content: el,
     index: i,
     isCorrect: i === correctAnswerIndex,
+    isSelected: false,
   }));
 
   return {
