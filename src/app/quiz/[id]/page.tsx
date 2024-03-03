@@ -13,6 +13,8 @@ import {
 } from '@/constants/route';
 import { useQuizsContext, useQuizsSettersContext } from '@/contexts';
 
+import { selectQuiz } from './utils';
+
 function QuizServerPage() {
   const router = useRouter();
   const quizs = useQuizsContext();
@@ -62,14 +64,7 @@ function QuizServerPage() {
       setQuizs?.((prevQuizs) => {
         const newQuizs = [...prevQuizs];
         const quiz = newQuizs[id];
-        newQuizs[id] = {
-          ...quiz,
-          selectedIndex: selectionIndex,
-          selections: quiz.selections.map((selection, i) => ({
-            ...selection,
-            isSelected: i === selectionIndex,
-          })),
-        };
+        newQuizs[id] = selectQuiz(quiz, selectionIndex);
 
         return newQuizs;
       });
