@@ -73,7 +73,7 @@ function ResultPage() {
           </div>
         ))}
       </section>
-      <footer className="flex flex-col justify-center items-center w-full min-h-[200px] child/Wo.last:mb-[30px]">
+      <footer className="flex flex-col justify-center items-center gap-6 w-full min-h-[200px] child/Wo.last:mb-[30px]">
         <Link
           href={QUIZ_START}
           className="flex justify-center items-center px-[20px] py-[10px] font-bold text-[30px] rounded-2xl bg-lime-500"
