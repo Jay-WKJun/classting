@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
 import { createDynamicQuizRoute } from '@/constants/route';
+import { useSetTimeContext } from '@/contexts';
 import { useSetQuizContext } from '@/contexts/QuizContext';
 import { QuizModelPOJO } from '@/models/QuizModel';
 
@@ -16,11 +17,15 @@ export function QuizStart({ quizs: quiz }: QuizStartProps) {
 
   const setQuizContext = useSetQuizContext();
   const initQuizs = setQuizContext?.initQuizs;
+  const setTime = useSetTimeContext();
 
   useEffect(() => {
-    initQuizs?.(quiz);
-    router.push(createDynamicQuizRoute(0));
-  }, [initQuizs, quiz, router]);
+    if (initQuizs && setTime) {
+      initQuizs(quiz);
+      setTime(Date.now());
+      router.push(createDynamicQuizRoute(0));
+    }
+  }, [initQuizs, quiz, router, setTime]);
 
   return <div>Loading...</div>;
 }
