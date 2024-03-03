@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# TODO
+
+[] Link component 만들어 공통 적용
+[] twin.macro 적용 (Selection)
+[] 에러페이지, 404, 500 추가
+
+---- 3/3
+
+[] storybook 테스트 추가
+[] 모든 순수함수들에 unit 테스트 추가
+[] playwright 추가
+
+---> 끝!

@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import { LinkButton } from '@/components/LinkButton';
 import { QUIZ_START } from '@/constants/route';
 
 function Home() {
@@ -9,12 +8,9 @@ function Home() {
         Classting Quiz!
       </h1>
       <div className="flex justify-center items-center flex-1">
-        <Link
-          className="flex justify-center items-center font-bold w-fit h-[1.5em] rounded-xl text-[40px] px-[10px] bg-red-300 hover:translate-y-[-10%] transition-transform"
-          href={QUIZ_START}
-        >
+        <LinkButton className="bg-red-300" href={QUIZ_START}>
           퀴즈 풀기
-        </Link>
+        </LinkButton>
       </div>
     </div>
   );

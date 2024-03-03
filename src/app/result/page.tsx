@@ -1,11 +1,11 @@
 'use client';
 
 import { format } from 'date-fns';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { QuizSelections, BarChart } from '@/components';
+import { LinkButton } from '@/components/LinkButton';
 import { HOME, QUIZ_START } from '@/constants/route';
 import { useQuizsContext, useTimeContext } from '@/contexts';
 
@@ -74,18 +74,12 @@ function ResultPage() {
         ))}
       </section>
       <footer className="flex flex-col justify-center items-center gap-6 w-full min-h-[200px] child/Wo.last:mb-[30px]">
-        <Link
-          href={QUIZ_START}
-          className="flex justify-center items-center px-[20px] py-[10px] font-bold text-[30px] rounded-2xl bg-lime-500"
-        >
+        <LinkButton href={QUIZ_START} className="bg-lime-500">
           다시 도전하기!
-        </Link>
-        <Link
-          href={HOME}
-          className="flex justify-center items-center px-[20px] py-[10px] font-bold text-[30px] rounded-2xl bg-slate-400"
-        >
+        </LinkButton>
+        <LinkButton href={HOME} className=" bg-slate-400">
           홈으로!
-        </Link>
+        </LinkButton>
       </footer>
     </div>
   );

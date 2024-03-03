@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import React, { MouseEvent, useEffect, useMemo, useState } from 'react';
 
 import { QuizSelections } from '@/components';
+import { LinkButton } from '@/components/LinkButton';
 import {
   QUIZ_START,
   HOME,
@@ -36,23 +37,22 @@ function QuizServerPage() {
     const quizLength = quizs.length;
     const isLast = id + 1 === quizLength;
 
-    const [callback, content] = isLast
-      ? [() => router.push(RESULT), '결과 보기']
-      : [() => router.push(createDynamicQuizRoute(id + 1)), '다음 문항'];
+    const [href, content] = isLast
+      ? [RESULT, '결과 보기']
+      : [createDynamicQuizRoute(id + 1), '다음 문항'];
 
     return (
-      <button
-        type="button"
-        className="text-[24px] rounded-2xl bg-red-400 px-[20px] py-[10px]"
+      <LinkButton
+        href={href}
+        className="text-[24px] bg-red-400"
         onClick={() => {
           setIsSelected(false);
-          callback();
         }}
       >
         {content}
-      </button>
+      </LinkButton>
     );
-  }, [id, isIdExist, quizs, router]);
+  }, [id, isIdExist, quizs]);
 
   const quizSelectClickHandler = useMemo(() => {
     if (isSelected) return undefined;

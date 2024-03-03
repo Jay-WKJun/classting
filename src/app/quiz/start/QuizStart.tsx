@@ -27,5 +27,6 @@ export function QuizStart({ quizs: quiz }: QuizStartProps) {
     }
   }, [initQuizs, quiz, router, setTime]);
 
+  // TODO: 가운데 맞추고, 로딩 스피너 추가
   return <div>Loading...</div>;
 }
