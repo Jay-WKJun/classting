@@ -4,9 +4,12 @@ import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { QuizSelections, BarChart, LinkButton, ChartData } from '@/components';
+import { BarChart, ChartData } from '@/components/BarChart';
+import { LinkButton } from '@/components/LinkButton';
+import { QuizSelections } from '@/components/QuizSelections';
 import { HOME, QUIZ_START } from '@/constants/route';
-import { useQuizsContext, useTimeContext } from '@/contexts';
+import { useQuizsContext } from '@/contexts/QuizContext';
+import { useTimeContext } from '@/contexts/TimeContext';
 import { QuizModel } from '@/models/QuizModel';
 import { countMatchingElements } from '@/utils';
 

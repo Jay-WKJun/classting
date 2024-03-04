@@ -1,4 +1,4 @@
-import { LinkButton } from '@/components';
+import { LinkButton } from '@/components/LinkButton';
 import { QUIZ_START } from '@/constants/route';
 
 function Home() {

@@ -3,14 +3,18 @@
 import { useParams, useRouter } from 'next/navigation';
 import React, { MouseEvent, useEffect, useMemo, useState } from 'react';
 
-import { QuizSelections, LinkButton } from '@/components';
+import { LinkButton } from '@/components/LinkButton';
+import { QuizSelections } from '@/components/QuizSelections';
 import {
   QUIZ_START,
   HOME,
   RESULT,
   createDynamicQuizRoute,
 } from '@/constants/route';
-import { useQuizsContext, useQuizsSettersContext } from '@/contexts';
+import {
+  useQuizsContext,
+  useQuizsSettersContext,
+} from '@/contexts/QuizContext';
 import { selectQuiz } from '@/models/QuizModel';
 
 function QuizServerPage() {

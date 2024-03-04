@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { LinkButton } from '@/components';
+import { LinkButton } from '@/components/LinkButton';
 import { HOME } from '@/constants/route';
 
 function GlobalErrorPage({

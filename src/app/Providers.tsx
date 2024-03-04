@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import { QuizStateProvider, TimeStateProvider } from '@/contexts';
+import { QuizStateProvider } from '@/contexts/QuizContext';
+import { TimeStateProvider } from '@/contexts/TimeContext';
 
 interface ProvidersProps {
   children: React.ReactElement;
