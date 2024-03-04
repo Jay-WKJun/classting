@@ -12,6 +12,14 @@ import { countMatchingElements } from '@/utils';
 
 const BAR_COLORS = ['#8884d8', '#de3c13'];
 
+function getCountLabel(label: string, count: number) {
+  return `${label} : ${count} 개`;
+}
+
+function getSpentTime(startTime: number) {
+  return Date.now() - startTime;
+}
+
 function ResultPage() {
   const [resultTime, setResultTime] = useState(0);
 
@@ -88,14 +96,6 @@ function ResultPage() {
       </footer>
     </div>
   );
-}
-
-export function getCountLabel(label: string, count: number) {
-  return `${label} : ${count} 개`;
-}
-
-export function getSpentTime(startTime: number) {
-  return Date.now() - startTime;
 }
 
 export default ResultPage;
