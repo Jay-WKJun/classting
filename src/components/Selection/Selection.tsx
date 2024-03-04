@@ -18,6 +18,7 @@ function Selection({
   state,
   onClick,
 }: SelectionProps) {
+  console.log(state, content)
   const backgroundColor = useMemo(() => {
     if (state === 'selected') {
       return 'green';
@@ -42,10 +43,6 @@ function Selection({
         className={
           'w-[15px] h-[15px] mr-[10px] rounded-full content-none bg-black'
         }
-        style={{
-          backgroundColor:
-            backgroundColor === 'white' ? 'black' : backgroundColor,
-        }}
       />
       <span>{content}</span>
     </button>
