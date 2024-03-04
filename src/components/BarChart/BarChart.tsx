@@ -11,9 +11,9 @@ import {
 export type ChartData = {
   name: string;
   values: {
-    [key: string] : number
+    [key: string]: number;
   };
-}
+};
 
 interface BarChartProps {
   width: number;
@@ -22,8 +22,16 @@ interface BarChartProps {
   chartDatas: ChartData[];
 }
 
-export const BarChart = memo(function BarChart({ width, height, chartDatas, barColors }: BarChartProps) {
-  const inputData = chartDatas.map(({ name, values }) => ({ name, ...values }));
+export const BarChart = memo(function BarChart({
+  width,
+  height,
+  chartDatas,
+  barColors,
+}: BarChartProps) {
+  const inputData = chartDatas.map(({ name, values }) => ({
+    name,
+    ...values,
+  }));
   const longestValues = getLongestValues(chartDatas);
 
   return (
@@ -32,18 +40,10 @@ export const BarChart = memo(function BarChart({ width, height, chartDatas, barC
       <XAxis dataKey="name" />
       <Tooltip />
       <Legend />
-      {
-        Object.entries(longestValues).map(([key, value], i) => {
-          const barColor = barColors[i];
-          return (
-            <Bar
-              key={`${key}-${barColor}`}
-              dataKey={key}
-              fill={barColor}
-            />
-          )
-        })
-      }
+      {Object.entries(longestValues).map(([key], i) => {
+        const barColor = barColors[i];
+        return <Bar key={`${key}-${barColor}`} dataKey={key} fill={barColor} />;
+      })}
     </BarChartComponent>
   );
 });
@@ -51,7 +51,7 @@ export const BarChart = memo(function BarChart({ width, height, chartDatas, barC
 function getLongestValues(data: ChartData[]) {
   let maxLength = 0;
   let index = 0;
-  data.forEach(({values}, i) => {
+  data.forEach(({ values }, i) => {
     const valueLength = Object.keys(values).length;
     if (valueLength > maxLength) {
       maxLength = valueLength;

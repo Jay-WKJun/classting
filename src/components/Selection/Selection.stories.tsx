@@ -1,9 +1,9 @@
+import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {mockQuizs} from '@/mock/quizsMock';
+import { mockQuizs } from '@/mock/quizsMock';
 
 import { Selection } from './Selection';
-import { useArgs } from '@storybook/preview-api';
 
 const meta = {
   title: 'Quiz/Selection',
@@ -25,13 +25,13 @@ export const Gallery: Story = {
   },
   render: function Render(args) {
     return (
-      <div className='w-full h-full flex justify-center items-center gap-[30px]'>
+      <div className="w-full h-full flex justify-center items-center gap-[30px]">
         <Selection {...args} state="selected" />
         <Selection {...args} state="answer" />
         <Selection {...args} />
       </div>
     );
-  }
+  },
 };
 
 export const Toggle: Story = {
@@ -54,10 +54,8 @@ export const Toggle: Story = {
       setArgs({ state: newSelectState });
     };
 
-    return (
-      <Selection {...args} onClick={onClick} />
-    );
-  }
+    return <Selection {...args} onClick={onClick} />;
+  },
 };
 
 export const WithHold: Story = {
@@ -81,8 +79,6 @@ export const WithHold: Story = {
       setArgs({ state: newSelectState });
     };
 
-    return (
-      <Selection {...args} onClick={onClick} />
-    );
-  }
+    return <Selection {...args} onClick={onClick} />;
+  },
 };

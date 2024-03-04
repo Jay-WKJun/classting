@@ -60,7 +60,7 @@ const chartDatas2: ChartData[] = [
       second: 2,
     },
   },
-]
+];
 
 export const MultipleGraph: Story = {
   args: {
