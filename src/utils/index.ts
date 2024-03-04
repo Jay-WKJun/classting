@@ -37,3 +37,27 @@ export function toNumber(param: unknown) {
   if (typeof param === 'number') return Number(param);
   return null;
 }
+
+export function getNextNumberInArray({
+  arr,
+  center,
+  isSmall = false,
+}: {
+  arr: number[];
+  center: number;
+  isSmall: boolean;
+}) {
+  if (arr.length <= 0) return null;
+
+  if (isSmall) {
+    return arr.reduce((prev, curr) => {
+      if (curr < center) return Math.max(prev, curr);
+      return prev;
+    }, center);
+  }
+
+  return arr.reduce((prev, curr) => {
+    if (curr > center) return Math.min(prev, curr);
+    return prev;
+  }, center);
+}

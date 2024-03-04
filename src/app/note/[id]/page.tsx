@@ -11,7 +11,7 @@ import { Spinner } from '@/components/Spinner';
 import { DB_CONFIG, QUIZ_STORE_NAME } from '@/constants/db';
 import { createDynamicNoteRoute } from '@/constants/route';
 import { QuizModel } from '@/models/QuizModel';
-import { toNumber } from '@/utils';
+import { getNextNumberInArray, toNumber } from '@/utils';
 
 initDB(DB_CONFIG);
 
@@ -48,19 +48,21 @@ function NotePage() {
       const quizHistories = await getAll();
 
       new Promise((resolve) => {
-        const prevId = quizHistories
-          .filter((quizHistory) => quizHistory.id < currentId)
-          .sort((a, b) => b.id - a.id)[0]?.id;
-
+        const prevId = getNextNumberInArray({
+          arr: quizHistories,
+          center: currentId,
+          isSmall: true,
+        });
         setPrevId(prevId ?? null);
         resolve(null);
       });
 
       new Promise((resolve) => {
-        const nextId = quizHistories
-          .filter((quizHistory) => quizHistory.id > currentId)
-          .sort((a, b) => a.id - b.id)[0]?.id;
-
+        const nextId = getNextNumberInArray({
+          arr: quizHistories,
+          center: currentId,
+          isSmall: false,
+        });
         setNextId(nextId ?? null);
         resolve(null);
       });
