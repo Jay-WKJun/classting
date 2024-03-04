@@ -29,6 +29,9 @@ dependencies:
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
+  react-indexed-db-hook:
+    specifier: ^1.0.14
+    version: 1.0.14(react-dom@18.2.0)(react@18.2.0)
   recharts:
     specifier: ^2.12.2
     version: 2.12.2(react-dom@18.2.0)(react@18.2.0)
@@ -11298,6 +11301,16 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.1.0
     dev: true
+
+  /react-indexed-db-hook@1.0.14(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-tQ6rWofgXUCBhZp9pRpWzthzPbjqcll5uXMo07lbQTKl47VyL9nw9wfVswRxxzS5yj5Sq/VHUkNUjamWbA/M/w==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
