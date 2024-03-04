@@ -1,4 +1,4 @@
-import { shuffle, countMatchingElements } from './array';
+import { shuffle, countMatchingElements, getNextNumberInArray } from './array';
 
 describe('shuffle function', () => {
   test('shuffles the array', () => {
@@ -67,5 +67,84 @@ describe('countMatchingElements function', () => {
 
     expect(count).toBe(2);
     expect(callback).toHaveBeenCalledTimes(arr.length);
+  });
+});
+
+describe('getNextNumberInArray function', () => {
+  it('should return null when the array is empty', () => {
+    const result = getNextNumberInArray({ arr: [], center: 0, isSmall: false });
+    expect(result).toBeNull();
+  });
+
+  it('should return the next smallest number when isSmall is true', () => {
+    const result = getNextNumberInArray({
+      arr: [1, 3, 5, 7, 9],
+      center: 4,
+      isSmall: true,
+    });
+    expect(result).toBe(3);
+  });
+
+  it('should return the next largest number when isSmall is false', () => {
+    const result = getNextNumberInArray({
+      arr: [1, 3, 5, 7, 9],
+      center: 4,
+      isSmall: false,
+    });
+    expect(result).toBe(5);
+  });
+
+  it('should return the next smallest number when isSmall is true even though center is one of element', () => {
+    const result = getNextNumberInArray({
+      arr: [1, 3, 5, 7, 9],
+      center: 5,
+      isSmall: true,
+    });
+    expect(result).toBe(3);
+  });
+
+  it('should return the next largest number when isSmall is false even though center is one of element', () => {
+    const result = getNextNumberInArray({
+      arr: [1, 3, 5, 7, 9],
+      center: 5,
+      isSmall: false,
+    });
+    expect(result).toBe(7);
+  });
+
+  it('should handle negative numbers correctly when isSmall is true', () => {
+    const result = getNextNumberInArray({
+      arr: [-9, -7, -5, -3, -1],
+      center: -4,
+      isSmall: true,
+    });
+    expect(result).toBe(-5);
+  });
+
+  it('should handle negative numbers correctly when isSmall is false', () => {
+    const result = getNextNumberInArray({
+      arr: [-9, -7, -5, -3, -1],
+      center: -4,
+      isSmall: false,
+    });
+    expect(result).toBe(-3);
+  });
+
+  it('should return center when there is no smaller number than center and isSmall is true', () => {
+    const result = getNextNumberInArray({
+      arr: [5, 7, 9],
+      center: 4,
+      isSmall: true,
+    });
+    expect(result).toBe(4);
+  });
+
+  it('should return center when there is no larger number than center and isSmall is false', () => {
+    const result = getNextNumberInArray({
+      arr: [1, 2, 3],
+      center: 4,
+      isSmall: false,
+    });
+    expect(result).toBe(4);
   });
 });
