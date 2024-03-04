@@ -5,12 +5,7 @@ import React, { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import { LinkButton } from '@/components/LinkButton';
 import { QuizSelections } from '@/components/QuizSelections';
-import {
-  QUIZ_START,
-  HOME,
-  RESULT,
-  createDynamicQuizRoute,
-} from '@/constants/route';
+import { HOME, RESULT, createDynamicQuizRoute } from '@/constants/route';
 import {
   useQuizsContext,
   useQuizsSettersContext,
@@ -18,7 +13,7 @@ import {
 import { QuizModel, selectQuiz } from '@/models/QuizModel';
 import { toNumber } from '@/utils';
 
-function QuizServerPage() {
+function QuizPage() {
   const router = useRouter();
   const quizs = useQuizsContext();
   const quizsSetters = useQuizsSettersContext();
@@ -30,10 +25,10 @@ function QuizServerPage() {
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
-    if (id == null) {
+    if (quizs.length <= 0 || id == null) {
       router.push(HOME);
     }
-  }, [id, router]);
+  }, [id, quizs, router]);
 
   const createToTheNextButtonComponent = useCallback(
     (id: number, quizs: QuizModel[]) => {
@@ -73,9 +68,12 @@ function QuizServerPage() {
     [setQuizs],
   );
 
-  if (!quizs || quizs.length <= 0 || id == null) {
-    router.push(QUIZ_START);
-    return null;
+  if (id == null) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        잘못된 접근입니다.
+      </div>
+    );
   }
 
   return (
@@ -91,4 +89,4 @@ function QuizServerPage() {
   );
 }
 
-export default QuizServerPage;
+export default QuizPage;
