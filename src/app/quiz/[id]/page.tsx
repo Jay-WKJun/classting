@@ -12,8 +12,7 @@ import {
   createDynamicQuizRoute,
 } from '@/constants/route';
 import { useQuizsContext, useQuizsSettersContext } from '@/contexts';
-
-import { selectQuiz } from './utils';
+import { selectQuiz } from '@/models/QuizModel';
 
 function QuizServerPage() {
   const router = useRouter();
