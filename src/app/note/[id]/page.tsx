@@ -11,6 +11,7 @@ import { Spinner } from '@/components/Spinner';
 import { DB_CONFIG, QUIZ_STORE_NAME } from '@/constants/db';
 import { createDynamicNoteRoute } from '@/constants/route';
 import { QuizModel } from '@/models/QuizModel';
+import { toNumber } from '@/utils';
 
 initDB(DB_CONFIG);
 
@@ -22,7 +23,7 @@ type QuizHistory = {
 
 function NotePage() {
   const params = useParams();
-  const id = Number(params.id);
+  const id = toNumber(params.id);
   const router = useRouter();
 
   const [quizHistory, setQuizHistory] = useState<
@@ -34,12 +35,12 @@ function NotePage() {
   const { getByID, getAll } = useIndexedDB(QUIZ_STORE_NAME);
 
   useEffect(() => {
-    if (id == null || Number.isNaN(id)) {
+    if (id == null) {
       router.push('/not-found');
       return;
     }
 
-    async function init() {
+    async function init(id: number) {
       const quizHistory = await getByID(id);
       setQuizHistory(quizHistory ?? null);
 
@@ -65,7 +66,7 @@ function NotePage() {
       });
     }
 
-    init();
+    init(id);
   }, [getAll, getByID, id, router]);
 
   useEffect(() => {

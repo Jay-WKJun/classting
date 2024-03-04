@@ -32,3 +32,8 @@ export function countMatchingElements<T>(
     return prev;
   }, 0);
 }
+
+export function toNumber(param: unknown) {
+  if (typeof param === 'number') return Number(param);
+  return null;
+}
