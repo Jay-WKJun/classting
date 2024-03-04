@@ -13,7 +13,7 @@ interface QuizSelectionsProps {
 }
 
 export function QuizSelections({ hold, quiz, onClick }: QuizSelectionsProps) {
-  const isSelected = !!quiz.selectedIndex;
+  const isSelected = quiz.selectedIndex != null;
 
   return (
     <div className="flex flex-col w-full h-fit gap-[30px]">
