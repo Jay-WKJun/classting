@@ -7,7 +7,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
 
   plugins: ['@typescript-eslint', 'import', 'prettier', 'unused-imports'],
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'airbnb-base', 'prettier', 'next/core-web-vitals'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'airbnb-base', 'prettier', 'next/core-web-vitals', 'plugin:storybook/recommended'],
   settings: {
     'import/parser': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
