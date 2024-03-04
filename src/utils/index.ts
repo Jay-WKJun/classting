@@ -1,3 +1,5 @@
+import he from 'he';
+
 export function shuffle<T extends Array<unknown>>(arr: T): T[number][] {
   const newArr = [...arr];
 
@@ -18,10 +20,7 @@ export function shuffle<T extends Array<unknown>>(arr: T): T[number][] {
 }
 
 export function decodeHtmlString(string: string) {
-  const areaElement = document.createElement('textarea');
-  areaElement.innerHTML = string;
-
-  return areaElement.value;
+  return he.decode(string)
 }
 
 export function isNumber(any: unknown): any is number {
