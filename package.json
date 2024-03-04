@@ -33,6 +33,7 @@
     "@storybook/addon-themes": "^7.6.17",
     "@storybook/blocks": "^7.6.17",
     "@storybook/nextjs": "^7.6.17",
+    "@storybook/preview-api": "^7.6.17",
     "@storybook/react": "^7.6.17",
     "@storybook/test": "^7.6.17",
     "@types/he": "^1.2.3",
@@ -61,6 +62,7 @@
     "storybook": "^7.6.17",
     "style-loader": "^3.3.4",
     "tailwindcss": "^3.3.0",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5"
   }
 }
