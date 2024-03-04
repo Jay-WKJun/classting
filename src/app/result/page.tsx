@@ -4,11 +4,13 @@ import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { QuizSelections, BarChart, LinkButton } from '@/components';
+import { QuizSelections, BarChart, LinkButton, ChartData } from '@/components';
 import { HOME, QUIZ_START } from '@/constants/route';
 import { useQuizsContext, useTimeContext } from '@/contexts';
 
 import { getCounts, getCountLabel, getSpentTime } from './utils';
+
+const BAR_COLORS = ['#8884d8', '#de3c13'];
 
 function ResultPage() {
   const [resultTime, setResultTime] = useState(0);
@@ -40,21 +42,13 @@ function ResultPage() {
 
   const SpentTime = format(resultTime, '소요시간 : m분 s초');
 
-  const barGraphData = [
+  const chartDatas: ChartData[] = [
     {
       name: 'result',
-      bars: [
-        {
-          key: 'correct',
-          color: '#8884d8',
-          value: correctCount,
-        },
-        {
-          key: 'inCorrect',
-          color: '#de3c13',
-          value: inCorrectCount,
-        },
-      ],
+      values: {
+        correct: correctCount,
+        incorrect: inCorrectCount,
+      },
     },
   ];
 
@@ -62,7 +56,12 @@ function ResultPage() {
     <div className="w-full py-[100px]">
       <section className="flex flex-col justify-around items-center h-fit mb-[50px]">
         <h1 className="mb-[30px]">결과</h1>
-        <BarChart width={300} height={300} data={barGraphData} />
+        <BarChart
+          width={300}
+          height={300}
+          barColors={BAR_COLORS}
+          chartDatas={chartDatas}
+        />
         <h3>{CorrectCount}</h3>
         <h3>{InCorrectCount}</h3>
         <h3>{SpentTime}</h3>
