@@ -9,7 +9,7 @@ import { BarChart, ChartData } from '@/components/BarChart';
 import { LinkButton } from '@/components/LinkButton';
 import { QuizSelections } from '@/components/QuizSelections';
 import { DB_CONFIG, QUIZ_STORE_NAME } from '@/constants/db';
-import { HOME, QUIZ_START } from '@/constants/route';
+import { HOME, QUIZ_START, createDynamicNoteRoute } from '@/constants/route';
 import { useQuizsContext } from '@/contexts/QuizContext';
 import { useTimeContext } from '@/contexts/TimeContext';
 import { QuizModel } from '@/models/QuizModel';
@@ -29,6 +29,7 @@ function getSpentTime(startTime: number) {
 
 function ResultPage() {
   const [resultTime, setResultTime] = useState(0);
+  const [newRecordId, setNewRecordId] = useState<number | null>(null);
 
   const router = useRouter();
   const startTime = useTimeContext();
@@ -53,6 +54,7 @@ function ResultPage() {
       })
         .then((res) => {
           console.log('new Index : ', res);
+          setNewRecordId(res);
         })
         .catch((error) => {
           console.error('DB Transaction error : ', error);
@@ -111,11 +113,20 @@ function ResultPage() {
         ))}
       </section>
       <footer className="flex flex-col justify-center items-center gap-6 w-full min-h-[200px] child/Wo.last:mb-[30px]">
-        <LinkButton href={QUIZ_START} className="bg-lime-500">
+        <LinkButton href={QUIZ_START} className="bg-red-500">
           다시 도전하기!
         </LinkButton>
         <LinkButton href={HOME} className=" bg-slate-400">
           홈으로!
+        </LinkButton>
+        <LinkButton
+          href={createDynamicNoteRoute(newRecordId ?? 0)}
+          className=" bg-green-400"
+          onClick={() => {
+            alert('asdf');
+          }}
+        >
+          기록보기
         </LinkButton>
       </footer>
     </div>
