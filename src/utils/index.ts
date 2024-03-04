@@ -52,13 +52,19 @@ export function getNextNumberInArray({
 
   if (isSmall) {
     return arr.reduce((prev, curr) => {
-      if (curr < center) return Math.max(prev, curr);
+      if (curr < center) {
+        if (prev < center) return Math.max(prev, curr);
+        return curr;
+      }
       return prev;
     }, center);
   }
 
   return arr.reduce((prev, curr) => {
-    if (curr > center) return Math.min(prev, curr);
+    if (curr > center) {
+      if (prev > center) return Math.min(prev, curr);
+      return curr;
+    }
     return prev;
   }, center);
 }
