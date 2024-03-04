@@ -39,6 +39,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'prefer-destructuring': 'off',
     'prefer-arrow-callback': 'off',
+    'no-new': 'off',
 
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
