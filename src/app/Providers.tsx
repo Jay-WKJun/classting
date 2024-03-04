@@ -5,7 +5,7 @@ import React from 'react';
 import { QuizStateProvider, TimeStateProvider } from '@/contexts';
 
 interface ProvidersProps {
-  children?: React.ReactNode;
+  children: React.ReactElement;
 }
 
 export function Providers({ children }: ProvidersProps) {
