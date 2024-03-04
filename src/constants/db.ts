@@ -8,7 +8,7 @@ export const QUIZ_STORE_SCHEMA = {
   storeSchema: [
     { name: 'quizs', keypath: 'quizs', options: { unique: false } },
     { name: 'spendTime', keypath: 'spendTime', options: { unique: false } },
-    { name: 'createdAt', keypath: 'createdAt', options: { unique: false } },
+    { name: 'createdAt', keypath: 'createdAt', options: { unique: true } },
   ],
 };
 
