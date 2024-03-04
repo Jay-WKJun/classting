@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-import { Spinner } from '@/components';
+import { Spinner } from '@/components/Spinner';
 import { createDynamicQuizRoute } from '@/constants/route';
-import { useSetTimeContext } from '@/contexts';
 import { useQuizsSettersContext } from '@/contexts/QuizContext';
+import { useSetTimeContext } from '@/contexts/TimeContext';
 import { QuizModelPOJO } from '@/models/QuizModel';
 
 interface QuizStartProps {

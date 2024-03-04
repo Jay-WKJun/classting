@@ -3,15 +3,19 @@
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useIndexedDB, initDB } from 'react-indexed-db-hook';
 
 import { BarChart, ChartData } from '@/components/BarChart';
 import { LinkButton } from '@/components/LinkButton';
 import { QuizSelections } from '@/components/QuizSelections';
+import { DB_CONFIG, QUIZ_STORE_NAME } from '@/constants/db';
 import { HOME, QUIZ_START } from '@/constants/route';
 import { useQuizsContext } from '@/contexts/QuizContext';
 import { useTimeContext } from '@/contexts/TimeContext';
 import { QuizModel } from '@/models/QuizModel';
 import { countMatchingElements } from '@/utils';
+
+initDB(DB_CONFIG);
 
 const BAR_COLORS = ['#8884d8', '#de3c13'];
 
@@ -29,6 +33,7 @@ function ResultPage() {
   const router = useRouter();
   const startTime = useTimeContext();
   const quizs = useQuizsContext();
+  const { add } = useIndexedDB(QUIZ_STORE_NAME);
 
   useEffect(() => {
     if (quizs.length <= 0 || !startTime) {
@@ -38,6 +43,22 @@ function ResultPage() {
 
     setResultTime(getSpentTime(startTime));
   }, [quizs, router, startTime]);
+
+  useEffect(() => {
+    if (resultTime > 0 && quizs.length > 0) {
+      add({
+        quizs,
+        spendTime: resultTime,
+        createdAt: Date.now(),
+      })
+        .then((res) => {
+          console.log('new Index : ', res);
+        })
+        .catch((error) => {
+          console.error('DB Transaction error : ', error);
+        });
+    }
+  }, [add, quizs, resultTime]);
 
   const correctCount = countMatchingElements<QuizModel>(
     quizs,
