@@ -1,9 +1,9 @@
+import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react';
-import {useArgs} from '@storybook/preview-api';
 
+import { mockQuizs } from '@/mock/quizsMock';
 import { selectQuiz } from '@/models/QuizModel';
 
-import {mockQuizs} from '@/mock/quizsMock';
 import { QuizSelections } from './QuizSelections';
 
 const meta = {
@@ -28,14 +28,19 @@ export const Primary: Story = {
   render: function Render(args) {
     const [{ quiz }, setArgs] = useArgs();
 
-    const handleSelectionClick = (_: React.MouseEvent, selectionIndex: number) => {
-      const {quiz} = args;
+    const handleSelectionClick = (
+      _: React.MouseEvent,
+      selectionIndex: number,
+    ) => {
+      const { quiz } = args;
       const selectedQuiz = selectQuiz(quiz, selectionIndex);
       setArgs({ quiz: selectedQuiz });
     };
 
-    return <QuizSelections {...args} quiz={quiz} onClick={handleSelectionClick} />;
-  }
+    return (
+      <QuizSelections {...args} quiz={quiz} onClick={handleSelectionClick} />
+    );
+  },
 };
 
 export const Second: Story = {
@@ -45,14 +50,19 @@ export const Second: Story = {
   render: function Render(args) {
     const [{ quiz }, setArgs] = useArgs();
 
-    const handleSelectionClick = (_: React.MouseEvent, selectionIndex: number) => {
-      const {quiz} = args;
+    const handleSelectionClick = (
+      _: React.MouseEvent,
+      selectionIndex: number,
+    ) => {
+      const { quiz } = args;
       const selectedQuiz = selectQuiz(quiz, selectionIndex);
       setArgs({ quiz: selectedQuiz });
     };
 
-    return <QuizSelections {...args} quiz={quiz} onClick={handleSelectionClick} />;
-  }
+    return (
+      <QuizSelections {...args} quiz={quiz} onClick={handleSelectionClick} />
+    );
+  },
 };
 
 export const WithHold: Story = {
@@ -63,13 +73,17 @@ export const WithHold: Story = {
   render: function Render(args) {
     const [{ quiz }, setArgs] = useArgs();
 
-    const handleSelectionClick = (_: React.MouseEvent, selectionIndex: number) => {
-      const {quiz} = args;
+    const handleSelectionClick = (
+      _: React.MouseEvent,
+      selectionIndex: number,
+    ) => {
+      const { quiz } = args;
       const selectedQuiz = selectQuiz(quiz, selectionIndex);
       setArgs({ quiz: selectedQuiz });
     };
 
-    return <QuizSelections {...args} quiz={quiz} onClick={handleSelectionClick} />;
-  }
+    return (
+      <QuizSelections {...args} quiz={quiz} onClick={handleSelectionClick} />
+    );
+  },
 };
-
