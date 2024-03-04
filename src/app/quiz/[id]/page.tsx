@@ -3,8 +3,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import React, { MouseEvent, useEffect, useMemo, useState } from 'react';
 
-import { QuizSelections } from '@/components';
-import { LinkButton } from '@/components/LinkButton';
+import { QuizSelections, LinkButton } from '@/components';
 import {
   QUIZ_START,
   HOME,
