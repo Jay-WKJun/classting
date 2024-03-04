@@ -35,7 +35,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-# TODO
+# 요구사항
 
 [x] 사용자는 '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시작할 수 있다.
 [x] 사용자는 문항에 대한 답안을 4개 보기 중에 선택할 수 있다.
@@ -49,12 +49,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   [x] 오답 수
   [x] 정 오답에 대한 비율을 차트로 표기
 [x] 오답 노트 기능
-
----- 3/3
-
-[x] storybook 테스트 추가 (순수 component에만 적용)
-[x] 모든 순수함수들에 unit 테스트 추가
-
----> 끝!
 
 # 테스트 선정 이유
