@@ -18,7 +18,6 @@ function Selection({
   state,
   onClick,
 }: SelectionProps) {
-  console.log(state, content)
   const backgroundColor = useMemo(() => {
     if (state === 'selected') {
       return 'green';

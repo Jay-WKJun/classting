@@ -44,6 +44,7 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   webpackFinal: (config) => {
+    // @ts-expect-error: expected Error
     config.resolve.plugins = config.resolve?.plugins || [];
     config.resolve?.plugins.push(
       new TsconfigPathsPlugin({
