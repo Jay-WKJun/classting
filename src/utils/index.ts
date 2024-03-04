@@ -20,9 +20,15 @@ export function shuffle<T extends Array<unknown>>(arr: T): T[number][] {
 }
 
 export function decodeHtmlString(string: string) {
-  return he.decode(string)
+  return he.decode(string);
 }
 
-export function isNumber(any: unknown): any is number {
-  return typeof any === 'number';
+export function countMatchingElements<T>(
+  arr: T[],
+  callback: (el: T) => boolean,
+): number {
+  return arr.reduce((prev, curr) => {
+    if (callback(curr)) return prev + 1;
+    return prev;
+  }, 0);
 }

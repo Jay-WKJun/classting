@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { QuizSelections, BarChart, LinkButton, ChartData } from '@/components';
 import { HOME, QUIZ_START } from '@/constants/route';
 import { useQuizsContext, useTimeContext } from '@/contexts';
-
-import { getCounts, getCountLabel, getSpentTime } from './utils';
+import { QuizModel } from '@/models/QuizModel';
+import { countMatchingElements } from '@/utils';
 
 const BAR_COLORS = ['#8884d8', '#de3c13'];
 
@@ -28,13 +28,13 @@ function ResultPage() {
     setResultTime(getSpentTime(startTime));
   }, [quizs, router, startTime]);
 
-  const correctCount = getCounts(
+  const correctCount = countMatchingElements<QuizModel>(
+    quizs,
     (quiz) => quiz.correctAnswerIndex === quiz.selectedIndex,
-    quizs,
   );
-  const inCorrectCount = getCounts(
-    (quiz) => quiz.correctAnswerIndex !== quiz.selectedIndex,
+  const inCorrectCount = countMatchingElements<QuizModel>(
     quizs,
+    (quiz) => quiz.correctAnswerIndex !== quiz.selectedIndex,
   );
 
   const CorrectCount = getCountLabel('정답 갯수', correctCount);
@@ -88,6 +88,14 @@ function ResultPage() {
       </footer>
     </div>
   );
+}
+
+export function getCountLabel(label: string, count: number) {
+  return `${label} : ${count} 개`;
+}
+
+export function getSpentTime(startTime: number) {
+  return Date.now() - startTime;
 }
 
 export default ResultPage;
