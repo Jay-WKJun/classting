@@ -1,10 +1,9 @@
 import React, { MouseEvent } from 'react';
 
 import type { QuizModel } from '@/models/QuizModel';
+import type { SelectionModel } from '@/models/SelectionModel';
 
-import { Selection } from '../Selection';
-
-import { getSelectionState } from './utils';
+import { Selection, SelectionState } from '../Selection';
 
 interface QuizSelectionsProps {
   hold?: boolean;
@@ -35,4 +34,16 @@ export function QuizSelections({ hold, quiz, onClick }: QuizSelectionsProps) {
       </section>
     </div>
   );
+}
+
+function getSelectionState(selection: SelectionModel): SelectionState {
+  if (selection.isSelected) {
+    return 'selected';
+  }
+
+  if (selection.isCorrect) {
+    return 'answer';
+  }
+
+  return null;
 }
