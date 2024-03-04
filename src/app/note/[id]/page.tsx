@@ -23,17 +23,15 @@ type QuizHistory = {
 function NotePage() {
   const params = useParams();
   const id = Number(params.id);
-  const prevId = id - 1;
-  const nextId = id + 1;
   const router = useRouter();
 
   const [quizHistory, setQuizHistory] = useState<
     QuizHistory | null | undefined
   >();
-  const [prevExistState, setPrevExistState] = useState<boolean>(false);
-  const [nextExistState, setNextExistState] = useState<boolean>(false);
+  const [prevId, setPrevId] = useState<number | null>(null);
+  const [nextId, setNextId] = useState<number | null>(null);
 
-  const { getByID } = useIndexedDB(QUIZ_STORE_NAME);
+  const { getByID, getAll } = useIndexedDB(QUIZ_STORE_NAME);
 
   useEffect(() => {
     if (id == null || Number.isNaN(id)) {
@@ -41,40 +39,48 @@ function NotePage() {
       return;
     }
 
-    getByID<QuizHistory>(id).then((quizHistories) => {
-      setQuizHistory(quizHistories ?? null);
-    });
+    async function init() {
+      const quizHistory = await getByID(id);
+      setQuizHistory(quizHistory ?? null);
 
-    if (prevId >= 0) {
-      getByID<QuizHistory>(prevId).then((quizHistories) => {
-        setPrevExistState(quizHistories != null);
+      const currentId = quizHistory?.id ?? id;
+      const quizHistories = await getAll();
+
+      new Promise((resolve) => {
+        const prevId = quizHistories
+          .filter((quizHistory) => quizHistory.id < currentId)
+          .sort((a, b) => b.id - a.id)[0]?.id;
+
+        setPrevId(prevId ?? null);
+        resolve(null);
       });
-    } else {
-      setPrevExistState(false);
+
+      new Promise((resolve) => {
+        const nextId = quizHistories
+          .filter((quizHistory) => quizHistory.id > currentId)
+          .sort((a, b) => a.id - b.id)[0]?.id;
+
+        setNextId(nextId ?? null);
+        resolve(null);
+      });
     }
 
-    if (nextId >= 0) {
-      getByID<QuizHistory>(nextId).then((quizHistories) => {
-        setNextExistState(quizHistories != null);
-      });
-    } else {
-      setNextExistState(false);
-    }
-  }, [getByID, id, nextId, prevId, router]);
+    init();
+  }, [getAll, getByID, id, router]);
 
   useEffect(() => {
     if (quizHistory === null) {
-      if (nextExistState) {
-        router.replace(createDynamicNoteRoute(nextId));
+      if (nextId != null) {
+        router.push(createDynamicNoteRoute(nextId));
         return;
       }
-      if (prevExistState) {
-        router.replace(createDynamicNoteRoute(prevId));
+      if (prevId != null) {
+        router.push(createDynamicNoteRoute(prevId));
         return;
       }
-      router.replace('/not-found');
+      router.push('/not-found');
     }
-  }, [id, nextExistState, nextId, prevExistState, prevId, quizHistory, router]);
+  }, [nextId, prevId, quizHistory, router]);
 
   return (
     <div className="flex flex-col w-full h-full justify-center items-center relative overflow-y-auto">
@@ -101,7 +107,7 @@ function NotePage() {
         </div>
       )}
 
-      {prevExistState && (
+      {prevId != null && (
         <LinkButton
           href={`/note/${prevId}`}
           className="fixed top-[50%] left-[30px] bg-orange-400"
@@ -109,7 +115,7 @@ function NotePage() {
           &lt;
         </LinkButton>
       )}
-      {nextExistState && (
+      {nextId != null && (
         <LinkButton
           href={`/note/${nextId}`}
           className="fixed top-[50%] right-[30px] bg-orange-400"
