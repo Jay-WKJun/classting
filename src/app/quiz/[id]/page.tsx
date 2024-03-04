@@ -5,6 +5,7 @@ import React, { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import { LinkButton } from '@/components/LinkButton';
 import { QuizSelections } from '@/components/QuizSelections';
+import { Spinner } from '@/components/Spinner';
 import { HOME, RESULT, createDynamicQuizRoute } from '@/constants/route';
 import {
   useQuizsContext,
@@ -54,8 +55,10 @@ function QuizPage() {
     [],
   );
 
-  const createQuizSelectClickHandler = useCallback(
-    (id: number) => (_: MouseEvent<Element>, selectionIndex: number) => {
+  const handleQuizSelectionClick = useCallback(
+    (_: MouseEvent<Element>, selectionIndex: number) => {
+      if (id == null) return;
+
       setIsSelected(true);
       setQuizs?.((prevQuizs) => {
         const newQuizs = [...prevQuizs];
@@ -65,13 +68,15 @@ function QuizPage() {
         return newQuizs;
       });
     },
-    [setQuizs],
+    [id, setQuizs],
   );
 
-  if (id == null) {
+  if (quizs.length <= 0 || id == null) {
     return (
       <div className="w-full h-full flex justify-center items-center">
-        잘못된 접근입니다.
+        <div className="w-[100px] h-[100px]">
+          <Spinner />
+        </div>
       </div>
     );
   }
@@ -80,7 +85,7 @@ function QuizPage() {
     <div className="w-full min-h-full py-[50px]">
       <QuizSelections
         quiz={quizs[id]}
-        onClick={isSelected ? createQuizSelectClickHandler(id) : undefined}
+        onClick={isSelected ? undefined : handleQuizSelectionClick}
       />
       <footer className="w-full flex justify-center items-center mt-[50px]">
         {isSelected && createToTheNextButtonComponent(id, quizs)}
