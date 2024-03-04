@@ -34,8 +34,9 @@ export function countMatchingElements<T>(
 }
 
 export function toNumber(param: unknown) {
-  if (typeof param === 'number') return Number(param);
-  return null;
+  const numberedParam = Number(param);
+  if (Number.isNaN(numberedParam)) return null;
+  return numberedParam;
 }
 
 export function getNextNumberInArray({
