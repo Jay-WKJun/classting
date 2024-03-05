@@ -16,12 +16,13 @@
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
     "date-fns": "^3.3.1",
+    "dexie": "^3.2.6",
+    "dexie-react-hooks": "^1.1.7",
     "he": "^1.2.0",
     "humps": "^2.0.1",
     "next": "14.1.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-indexed-db-hook": "^1.0.14",
     "recharts": "^2.12.2"
   },
   "devDependencies": {
