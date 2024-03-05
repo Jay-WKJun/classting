@@ -104,6 +104,15 @@ function NotePage() {
           >
             {`< 🏠`}
           </LinkButton>
+          <button
+            type="button"
+            className="absolute top-[2%] right-[2%] rounded-xl bg-[gray] p-[1em]"
+            onClick={() => {
+              if (id != null) db.quizs.delete(id);
+            }}
+          >
+            ❌
+          </button>
         </div>
       )}
 
