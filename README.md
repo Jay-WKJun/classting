@@ -2,7 +2,8 @@
 
 간단한 퀴즈를 진행할 수 있는 App입니다! 🤩
 
-Url -> 
+Url -> [classting-fawn.vercel.app](https://classting-fawn.vercel.app/)
+
 
 # 🎉 How to start
 
