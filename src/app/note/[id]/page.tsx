@@ -1,19 +1,17 @@
 'use client';
 
 import { format } from 'date-fns';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { useIndexedDB, initDB } from 'react-indexed-db-hook';
 
 import { LinkButton } from '@/components/LinkButton';
 import { QuizSelections } from '@/components/QuizSelections';
 import { Spinner } from '@/components/Spinner';
-import { DB_CONFIG, QUIZ_STORE_NAME } from '@/constants/db';
+import { db } from '@/config/indexDB';
 import { HOME, createDynamicNoteRoute } from '@/constants/route';
 import { QuizModel } from '@/models/QuizModel';
 import { getNextNumberInArray, toNumber } from '@/utils';
-
-initDB(DB_CONFIG);
 
 type QuizHistory = {
   spendTime: number;
@@ -26,44 +24,38 @@ function NotePage() {
   const id = toNumber(params.id);
   const router = useRouter();
 
+  const quizs = useLiveQuery(() => db.quizs.toArray());
+
   const [quizHistory, setQuizHistory] = useState<
     QuizHistory | null | undefined
   >();
   const [prevId, setPrevId] = useState<number | null>(null);
   const [nextId, setNextId] = useState<number | null>(null);
 
-  const { getByID, getAll } = useIndexedDB(QUIZ_STORE_NAME);
-
   useEffect(() => {
     if (id == null) {
       router.push('/not-found');
       return;
     }
+    if (!quizs) return;
 
-    async function init(id: number) {
-      const quizHistory = await getByID(id);
+    const currentQuiz = quizs.find((quiz) => quiz.id === id);
 
-      const currentId = quizHistory?.id ?? id;
-      const quizHistories = await getAll();
+    const prevId = getNextNumberInArray({
+      arr: quizs.map((quiz) => quiz.id!),
+      center: id,
+      isSmall: true,
+    });
+    const nextId = getNextNumberInArray({
+      arr: quizs.map((quiz) => quiz.id!),
+      center: id,
+      isSmall: false,
+    });
 
-      const prevId = getNextNumberInArray({
-        arr: quizHistories.map((quiz) => quiz.id),
-        center: currentId,
-        isSmall: true,
-      });
-      const nextId = getNextNumberInArray({
-        arr: quizHistories.map((quiz) => quiz.id),
-        center: currentId,
-        isSmall: false,
-      });
-
-      setQuizHistory(quizHistory ?? null);
-      setPrevId(prevId ?? -1);
-      setNextId(nextId ?? -1);
-    }
-
-    init(id);
-  }, [getAll, getByID, id, router]);
+    setQuizHistory(currentQuiz ?? null);
+    setPrevId(prevId ?? -1);
+    setNextId(nextId ?? -1);
+  }, [id, quizHistory, quizs, router]);
 
   useEffect(() => {
     if (quizHistory === null && nextId != null && prevId != null) {
