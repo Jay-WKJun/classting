@@ -102,7 +102,7 @@ function NotePage() {
             href={HOME}
             className="absolute top-[2%] left-[3%] bg-orange-400"
           >
-            {`< 🏠`}
+            🏠
           </LinkButton>
           <button
             type="button"
