@@ -90,7 +90,7 @@ function NotePage() {
             </h3>
             <h3>{format(quizHistory.createdAt, 'yyyy/MM/dd hh:mm')}</h3>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 pb-[50px]">
             {quizHistory.quizs.map((quiz) => (
               <div key={quiz.question}>
                 <QuizSelections hold quiz={quiz} />
