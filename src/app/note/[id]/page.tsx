@@ -82,7 +82,7 @@ function NotePage() {
           <Spinner />
         </div>
       ) : (
-        <div className="flex flex-col items-center w-full h-full">
+        <div className="flex flex-col items-center w-full h-full relative">
           <h1 className="text-center">오답노트</h1>
           <div className="flex w-[70%] justify-between items-center mb-[50px]">
             <h3 className="">
@@ -97,6 +97,13 @@ function NotePage() {
               </div>
             ))}
           </div>
+
+          <LinkButton
+            href={HOME}
+            className="absolute top-[2%] left-[3%] bg-orange-400"
+          >
+            {`< 🏠`}
+          </LinkButton>
         </div>
       )}
 
