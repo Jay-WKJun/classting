@@ -40,6 +40,7 @@ module.exports = {
     'prefer-destructuring': 'off',
     'prefer-arrow-callback': 'off',
     'no-new': 'off',
+    'no-await-in-loop': 'off',
 
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
