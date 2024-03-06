@@ -116,7 +116,7 @@ function NotePage() {
         </div>
       )}
 
-      {prevId != null && (
+      {prevId != null && prevId !== id && (
         <LinkButton
           href={`/note/${prevId}`}
           className="fixed top-[50%] left-[30px] bg-orange-400"
@@ -124,7 +124,7 @@ function NotePage() {
           &lt;
         </LinkButton>
       )}
-      {nextId != null && (
+      {nextId != null && nextId !== id && (
         <LinkButton
           href={`/note/${nextId}`}
           className="fixed top-[50%] right-[30px] bg-orange-400"
