@@ -115,9 +115,6 @@ function ResultPage() {
         <LinkButton
           href={createDynamicNoteRoute(newRecordId ?? 0)}
           className=" bg-green-400"
-          onClick={() => {
-            alert('asdf');
-          }}
         >
           기록보기
         </LinkButton>
