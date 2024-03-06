@@ -32,14 +32,17 @@ function ResultPage() {
   const startTime = useTimeContext();
   const quizs = useQuizsContext();
 
-  useEffect(() => {
-    if (quizs.length <= 0 || !startTime) {
-      router.push(HOME);
-      return;
-    }
+  useEffect(
+    function initPage() {
+      if (quizs.length <= 0 || !startTime) {
+        router.push(HOME);
+        return;
+      }
 
-    setResultTime(getSpentTime(startTime));
-  }, [quizs, router, startTime]);
+      setResultTime(getSpentTime(startTime));
+    },
+    [quizs, router, startTime],
+  );
 
   useEffect(() => {
     if (resultTime > 0 && quizs.length > 0) {

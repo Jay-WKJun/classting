@@ -25,11 +25,14 @@ function QuizPage() {
 
   const [isSelected, setIsSelected] = useState(false);
 
-  useEffect(() => {
-    if (quizs.length <= 0 || id == null) {
-      router.push(HOME);
-    }
-  }, [id, quizs, router]);
+  useEffect(
+    function validatePage() {
+      if (quizs.length <= 0 || id == null) {
+        router.push(HOME);
+      }
+    },
+    [id, quizs, router],
+  );
 
   const createToTheNextButtonComponent = useCallback(
     (id: number, quizs: QuizModel[]) => {

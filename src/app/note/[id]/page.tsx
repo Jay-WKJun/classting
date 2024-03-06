@@ -32,48 +32,54 @@ function NotePage() {
   const [prevId, setPrevId] = useState<number | null>(null);
   const [nextId, setNextId] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (id == null) {
-      router.push('/not-found');
-      return;
-    }
-    if (!quizs) return;
-
-    const currentQuiz = quizs.find((quiz) => quiz.id === id);
-
-    const prevId = getNextNumberInArray({
-      arr: quizs.map((quiz) => quiz.id!),
-      center: id,
-      isSmall: true,
-    });
-    const nextId = getNextNumberInArray({
-      arr: quizs.map((quiz) => quiz.id!),
-      center: id,
-      isSmall: false,
-    });
-
-    setQuizHistory(currentQuiz ?? null);
-    setPrevId(prevId ?? -1);
-    setNextId(nextId ?? -1);
-  }, [id, quizHistory, quizs, router]);
-
-  useEffect(() => {
-    if (quizHistory === null && nextId != null && prevId != null) {
-      if (nextId < 0 && prevId < 0) {
-        alert('오답노트가 없습니다.');
-        router.replace(HOME);
+  useEffect(
+    function initPageState() {
+      if (id == null) {
+        router.push('/not-found');
         return;
       }
+      if (!quizs) return;
 
-      if (nextId !== id) {
-        router.replace(createDynamicNoteRoute(nextId));
-        return;
+      const currentQuiz = quizs.find((quiz) => quiz.id === id);
+
+      const prevId = getNextNumberInArray({
+        arr: quizs.map((quiz) => quiz.id!),
+        center: id,
+        isSmall: true,
+      });
+      const nextId = getNextNumberInArray({
+        arr: quizs.map((quiz) => quiz.id!),
+        center: id,
+        isSmall: false,
+      });
+
+      setQuizHistory(currentQuiz ?? null);
+      setPrevId(prevId ?? -1);
+      setNextId(nextId ?? -1);
+    },
+    [id, quizHistory, quizs, router],
+  );
+
+  useEffect(
+    function autoRedirectWhenNoteIsNotExist() {
+      if (quizHistory === null && nextId != null && prevId != null) {
+        if (nextId < 0 && prevId < 0) {
+          alert('오답노트가 없습니다.');
+          router.replace(HOME);
+          return;
+        }
+
+        if (nextId !== id) {
+          router.replace(createDynamicNoteRoute(nextId));
+          return;
+        }
+        if (prevId !== id) {
+          router.replace(createDynamicNoteRoute(prevId));
+        }
       }
-      if (prevId !== id) {
-        router.replace(createDynamicNoteRoute(prevId));
-      }
-    }
-  }, [id, nextId, prevId, quizHistory, router]);
+    },
+    [id, nextId, prevId, quizHistory, router],
+  );
 
   return (
     <div className="flex flex-col w-full h-full justify-center items-center relative overflow-y-auto">

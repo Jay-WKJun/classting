@@ -17,18 +17,21 @@ function QuizStartPage() {
   const initQuizs = quizsSettersContext?.initQuizs;
   const setTime = useSetTimeContext();
 
-  useEffect(() => {
-    const isSend = isSendRef.current;
-    if (initQuizs && setTime && router && !isSend) {
-      isSendRef.current = true;
-      getQuizs({}).then((res) => {
-        const quizs = res.results;
-        initQuizs(quizs);
-        setTime(Date.now());
-        router.push(createDynamicQuizRoute(0));
-      });
-    }
-  }, [initQuizs, router, setTime]);
+  useEffect(
+    function fetchQuizs() {
+      const isSend = isSendRef.current;
+      if (initQuizs && setTime && router && !isSend) {
+        isSendRef.current = true;
+        getQuizs({}).then((res) => {
+          const quizs = res.results;
+          initQuizs(quizs);
+          setTime(Date.now());
+          router.push(createDynamicQuizRoute(0));
+        });
+      }
+    },
+    [initQuizs, router, setTime],
+  );
 
   return (
     <div className="w-full h-full flex flex-col gap-[30px] justify-center items-center">
