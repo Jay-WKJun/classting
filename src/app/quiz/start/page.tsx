@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { getQuizs } from '@/api/quizApi';
 import { Spinner } from '@/components/Spinner';
@@ -10,6 +10,7 @@ import { useQuizsSettersContext } from '@/contexts/QuizContext';
 import { useSetTimeContext } from '@/contexts/TimeContext';
 
 function QuizStartPage() {
+  const isSendRef = useRef(false);
   const router = useRouter();
 
   const quizsSettersContext = useQuizsSettersContext();
@@ -17,7 +18,9 @@ function QuizStartPage() {
   const setTime = useSetTimeContext();
 
   useEffect(() => {
-    if (initQuizs && setTime) {
+    const isSend = isSendRef.current;
+    if (initQuizs && setTime && router && !isSend) {
+      isSendRef.current = true;
       getQuizs({}).then((res) => {
         const quizs = res.results;
         initQuizs(quizs);
