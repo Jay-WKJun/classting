@@ -44,19 +44,22 @@ function ResultPage() {
     [quizs, router, startTime],
   );
 
-  useEffect(() => {
-    if (spendTime > 0 && quizs.length > 0) {
-      db.quizs
-        .add({
-          quizs,
-          spendTime,
-          createdAt: Date.now(),
-        })
-        .then((newId) => {
-          setNewRecordId(toNumber(newId));
-        });
-    }
-  }, [quizs, spendTime]);
+  useEffect(
+    function setQuizResultInDb() {
+      if (spendTime > 0 && quizs.length > 0) {
+        db.quizs
+          .add({
+            quizs,
+            spendTime,
+            createdAt: Date.now(),
+          })
+          .then((newId) => {
+            setNewRecordId(toNumber(newId));
+          });
+      }
+    },
+    [quizs, spendTime],
+  );
 
   const correctCount = countMatchingElements<QuizModel>(
     quizs,
