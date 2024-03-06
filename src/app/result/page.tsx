@@ -20,12 +20,12 @@ function getCountLabel(label: string, count: number) {
   return `${label} : ${count} 개`;
 }
 
-function getSpentTime(startTime: number) {
+function getSpendTime(startTime: number) {
   return Date.now() - startTime;
 }
 
 function ResultPage() {
-  const [resultTime, setResultTime] = useState(0);
+  const [spendTime, setSpendTime] = useState(0);
   const [newRecordId, setNewRecordId] = useState<number | null>(null);
 
   const router = useRouter();
@@ -39,24 +39,24 @@ function ResultPage() {
         return;
       }
 
-      setResultTime(getSpentTime(startTime));
+      setSpendTime(getSpendTime(startTime));
     },
     [quizs, router, startTime],
   );
 
   useEffect(() => {
-    if (resultTime > 0 && quizs.length > 0) {
+    if (spendTime > 0 && quizs.length > 0) {
       db.quizs
         .add({
           quizs,
-          spendTime: resultTime,
+          spendTime,
           createdAt: Date.now(),
         })
         .then((newId) => {
           setNewRecordId(toNumber(newId));
         });
     }
-  }, [quizs, resultTime]);
+  }, [quizs, spendTime]);
 
   const correctCount = countMatchingElements<QuizModel>(
     quizs,
@@ -70,7 +70,7 @@ function ResultPage() {
   const CorrectCount = getCountLabel('정답 갯수', correctCount);
   const InCorrectCount = getCountLabel('오답 갯수', inCorrectCount);
 
-  const SpentTime = format(resultTime, '소요시간 : m분 s초');
+  const SpendTime = format(spendTime, '소요시간 : m분 s초');
 
   const chartDatas: ChartData[] = [
     {
@@ -94,7 +94,7 @@ function ResultPage() {
         />
         <h3>{CorrectCount}</h3>
         <h3>{InCorrectCount}</h3>
-        <h3>{SpentTime}</h3>
+        <h3>{SpendTime}</h3>
       </section>
       <hr />
       <section className="flex flex-col gap-[50px] mb-[50px]">
